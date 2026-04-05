@@ -7,133 +7,256 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-color: #00A99D; /* التركوازي الرسمي */
-            --secondary-color: #F7931E; /* البرتقالي للأزرار */
-            --dark-blue: #002e5b; /* الكحلي للعناوين */
-        }
-        body { font-family: 'Tajawal', sans-serif; }
-        .bg-global { background-color: var(--primary-color); }
-        .text-global { color: var(--primary-color); }
-        .bg-orange-global { background-color: var(--secondary-color); }
-    </style>
+   <style>
+    :root {
+        --primary-color: #00A99D; /* اللون التركواز platform.ye */
+        --secondary-color: #F7931E; /* اللون البرتقالي */
+        --white: #ffffff;
+    }
+
+    body {
+        font-family: 'Tajawal', sans-serif; }
+        .bg-global { background-color: #00A99D; } /* اللون الأزرق من هويتك */
+        .text-global { color: #00A99D; }
+       .border-global{color: #00A99D;}
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--white);
+        margin: 0;
+        padding: 0;
+    }
+
+    /* تنسيق القائمة العلوية Navbar */
+    .custom-nav {
+        background-color: var(--white);
+        padding: 10px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 3px solid var(--primary-color);
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--primary-color);
+        margin-left: 20px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: var(--secondary-color);
+    }
+
+    .btn-contact {
+        background-color: var(--primary-color);
+        color: white !important;
+        padding: 8px 20px;
+        border-radius: 5px;
+    }
+</style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <header class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-[--dark-blue]">
-        <div class="container mx-auto px-6 py-4 flex flex-row items-center justify-between">
-            
-            <div class="flex items-center space-x-reverse space-x-4 flex-shrink-0">
-                <img src="logo PNG-04.png" alt="Global Agency" class="h-20 md:h-28 w-auto object-contain">
-                <div class="flex flex-col">
-                    <span class="text-2xl md:text-3xl font-bold text-[--dark-blue] leading-none">Global Agency</span>
-                    <span class="text-xs md:text-sm text-gray-500 font-medium mt-1">للخدمات التقنية الرقمية</span>
-                </div>
+<header class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-[#002e5b]">
+    <div class="container mx-auto px-6 py-4 flex flex-row items-center justify-between">
+        
+        <div class="flex items-center space-x-reverse space-x-4 flex-shrink-0">
+            <img src="logo PNG-04.png" alt="Global Agency" class="h-20 md:h-28 w-auto object-contain">
+            <div class="flex flex-col">
+                <span class="text-2xl md:text-3xl font-bold text-[#002e5b] leading-none">Global Agency</span>
+                <span class="text-xs md:text-sm text-gray-500 font-medium mt-1">للخدمات التقنية الرقمية</span>
             </div>
-
-            <nav class="flex items-center space-x-reverse space-x-8 font-bold">
-                <div class="hidden md:flex space-x-reverse space-x-8 ml-4">
-                    <a href="#services" class="text-xl text-[--dark-blue] hover:text-[--primary-color] transition-all">خدماتنا</a>
-                    <a href="#about" class="text-xl text-[--dark-blue] hover:text-[--primary-color] transition-all">من نحن</a>
-                </div>
-                <a id="nav-order-btn" href="https://wa.me/967781088588" class="bg-[#F7931E] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#D97D1A] hover:scale-105 transition-all text-lg">
-                    اطلب الآن
-                </a>
-            </nav>
         </div>
-    </header>
+
+        <nav class="flex items-center space-x-reverse space-x-8 font-bold">
+            <div class="hidden md:flex space-x-reverse space-x-8 ml-4">
+                <a href="#services" class="text-xl text-[#002e5b] hover:text-[#00A99D] transition-all">خدماتنا</a>
+                <a href="#about" class="text-xl text-[#002e5b] hover:text-[#00A99D] transition-all">من نحن</a>
+            </div>
+            
+ <a id="nav-order-btn" href="https://wa.me/967781088588" class="bg-[#F7931E] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#D97D1A] hover:scale-105 transition-all text-lg">
+    اطلب الآن
+</a>
+        </nav>
+
+    </div>
+</header>
 
     <section class="bg-white py-20">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">نحول أفكارك الرقمية إلى <span class="text-global">واقع ملموس</span></h1>
-            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">شريكك الموثوق في البرمجة، التسويق، وصناعة المحتوى الاحترافي بأحدث التقنيات العالمية.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">نحول أفكارك الرقمية إلى <span class="text-global">واقع ملموس</span></h1>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">وكالة جلوبال أجنسي للخدمات التقنية الرقمية - شريكك الموثوق في البرمجة، التسويق، وصناعة المحتوى الاحترافي.</p>
             <div class="flex justify-center gap-4">
-                <a id="hero-services-btn" href="#services" class="bg-global text-white px-8 py-3 rounded-full text-lg font-bold hover:shadow-lg transition">استعرض خدماتنا</a>
-                <a id="hero-quote-btn" href="https://wa.me/967781088588" style="border-color:#00A99D" class="border-2 text-global px-8 py-3 rounded-full text-lg font-bold hover:shadow-lg transition">اطلب عرض سعر</a>
+               <a id="hero-services-btn" href="#services" class="bg-global text-white px-8 py-3 rounded-full text-lg font-bold hover:shadow-lg transition">استعرض خدماتنا</a>
+               <a id="hero-quote-btn" href="https://wa.me/967781088588" style="border-color:#00A99D" class="border-2 text-global px-8 py-3 rounded-full text-lg font-bold hover:shadow-lg transition">اطلب عرض سعر</a>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-24 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-[--dark-blue] mb-4">خدماتنا الشاملة</h2>
-                <div class="w-24 h-1 bg-[#F7931E] mx-auto mt-4 rounded-full"></div>
+   <section id="services" class="py-24 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-[#002e5b] mb-4">خدماتنا الشاملة</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto text-lg">نقدم حلولاً رقمية مبتكرة لتعزيز الحضور الرقمي والميداني لعملائنا بأعلى معايير الجودة.</p>
+            <div class="w-24 h-1 bg-[#F7931E] mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+                <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">📢</div>
+                <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">التسويق الرقمي والميداني</h3>
+                <p class="text-gray-600 leading-relaxed">استراتيجيات ترويجية شاملة تصل لجمهورك عبر الإنترنت وعلى أرض الواقع وعبر منصات التواصل.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
-                    <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">📢</div>
-                    <h3 class="text-2xl font-bold mb-4 text-[--dark-blue]">التسويق الرقمي والميداني</h3>
-                    <p class="text-gray-600">استراتيجيات ترويجية شاملة تصل لجمهورك عبر الإنترنت وعلى أرض الواقع.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
-                    <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🎨</div>
-                    <h3 class="text-2xl font-bold mb-4 text-[--dark-blue]">صناعة المحتوى والهويات</h3>
-                    <p class="text-gray-600">ابتكار محتوى جذاب وبناء هوية بصرية قوية تعكس قيم علامتك التجارية.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
-                    <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">📸</div>
-                    <h3 class="text-2xl font-bold mb-4 text-[--dark-blue]">التصوير الرقمي والطباعة</h3>
-                    <p class="text-gray-600">خدمات إنتاج مرئي احترافية وحلول طباعة متكاملة لجميع الحملات الإعلانية.</p>
-                </div>
-                </div>
-        </div>
-    </section>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+                <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🎨</div>
+                <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">صناعة المحتوى والهويات</h3>
+                <p class="text-gray-600 leading-relaxed">ابتكار محتوى جذاب وبناء هوية بصرية قوية تعكس قيم علامتك التجارية باحترافية.</p>
+            </div>
 
+            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+                <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">📸</div>
+                <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">التصوير الرقمي والطباعة</h3>
+                <p class="text-gray-600 leading-relaxed">خدمات إنتاج مرئي احترافية وحلول طباعة متكاملة لجميع الحملات الإعلانية.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+                <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🤖</div>
+                <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">الذكاء الاصطناعي والأتمتة</h3>
+                <p class="text-gray-600 leading-relaxed">توظيف تقنيات الذكاء الاصطناعي لتحسين تجربة العملاء وزيادة كفاءة الردود الآلية.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+                <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🛒</div>
+                <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">التجارة الإلكترونية والبيانات</h3>
+                <p class="text-gray-600 leading-relaxed">تصميم وبناء المتاجر الإلكترونية مع إدارة قواعد بيانات دقيقة للعملاء المستهدفين.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+                <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🚀</div>
+                <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">إدارة محركات البحث (SEO)</h3>
+                <p class="text-gray-600 leading-relaxed">تحسين ظهور موقعك وتصدر النتائج الأولى في محركات البحث العالمية لزيادة الوصول.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+    
     <section id="about" class="py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center gap-16">
-                <div class="w-full md:w-1/2 relative">
-                    <div class="relative bg-gray-100 rounded-3xl p-8 border-2 border-gray-50 shadow-2xl">
-                        <div class="text-9xl text-center py-10">🏢</div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#00A99D] to-transparent p-6 text-white text-center">
-                            <p class="font-bold">خبرة رقمية متميزة في السوق اليمني</p>
-                        </div>
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center gap-16">
+            
+            <div class="w-full md:w-1/2 relative">
+                <div class="absolute -top-4 -right-4 w-32 h-32 bg-[#00A99D] opacity-10 rounded-full blur-3xl"></div>
+                <div class="relative bg-gray-100 rounded-3xl p-8 overflow-hidden border-2 border-gray-50 shadow-2xl">
+                    <div class="text-9xl text-center py-10 filter drop-shadow-lg">🏢</div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#00A99D] to-transparent p-6 text-white text-center">
+                        <p class="font-bold">خبرة رقمية تمتد لسنوات في السوق اليمني</p>
                     </div>
                 </div>
-                <div class="w-full md:w-1/2">
-                    <h4 class="text-[#F7931E] font-bold mb-2">من نحن</h4>
-                    <h2 class="text-4xl font-bold text-[--dark-blue] mb-6">بوابتكم نحو التميز الرقمي</h2>
-                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">نحن وكالة متخصصة في تقديم الحلول التقنية المتكاملة، نجمع بين الإبداع الفني والخبرة البرمجية لتحقيق أهدافكم.</p>
-                    <a href="https://wa.me/967781088588" class="inline-block bg-global text-white px-10 py-4 rounded-full font-bold shadow-xl hover:bg-[#008b81] transition-all">تعرف علينا أكثر</a>
+            </div>
+
+            <div class="w-full md:w-1/2">
+                <h4 class="text-[#F7931E] font-bold tracking-widest uppercase mb-2">من نحن</h4>
+                <h2 class="text-4xl font-bold text-[#002e5b] mb-6 leading-tight">
+                    جلوبال أجنسي.. <br>
+                    <span class="text-[#00A99D]">بوابتكم نحو التميز الرقمي</span>
+                </h2>
+                <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                    نحن وكالة متخصصة في تقديم الحلول التقنية والخدمات الرقمية المتكاملة. نؤمن بأن التكنولوجيا هي المحرك الأساسي لنجاح الأعمال، لذا نعمل بشغف لتحويل رؤى عملائنا إلى واقع ملموس من خلال فريق عمل محترف يجمع بين الإبداع الفني والخبرة البرمجية.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                    <div class="flex items-center space-x-reverse space-x-3">
+                        <div class="w-10 h-10 bg-[#00A99D]-20 rounded-lg flex items-center justify-center text-[#00A99D]">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <span class="font-bold text-[#002e5b]">دقة في التنفيذ</span>
+                    </div>
+                    <div class="flex items-center space-x-reverse space-x-3">
+                        <div class="w-10 h-10 bg-[#00A99D]-20 rounded-lg flex items-center justify-center text-[#00A99D]">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <span class="font-bold text-[#002e5b]">حلول إبداعية</span>
+                    </div>
+                    <div class="flex items-center space-x-reverse space-x-3">
+                        <div class="w-10 h-10 bg-[#00A99D]-20 rounded-lg flex items-center justify-center text-[#00A99D]">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <span class="font-bold text-[#002e5b]">دعم فني مستمر</span>
+                    </div>
+                    <div class="flex items-center space-x-reverse space-x-3">
+                        <div class="w-10 h-10 bg-[#00A99D]-20 rounded-lg flex items-center justify-center text-[#00A99D]">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span class="font-bold text-[#002e5b]">تحليل ونمو</span>
+                    </div>
                 </div>
+
+                <a href="https://wa.me/967781088588" class="inline-block bg-[#00A99D] text-white px-10 py-4 rounded-full font-bold shadow-xl hover:bg-[#008b81] hover:-translate-y-1 transition-all duration-300">
+                    تعرف علينا أكثر
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+   <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-6 text-center">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold italic text-[#00A99D]">Global Agency</h2>
+            <p class="text-gray-400 mt-2">نحول أفكارك الرقمية إلى واقع ملموس</p>
+        </div>
+
+        <div class="flex justify-center space-x-reverse space-x-8 mb-8">
+            <a href="https://www.facebook.com/share/1Ec8oNiDFm/" target="_blank" class="text-gray-400 hover:text-[#1877F2] transition-all transform hover:scale-125 text-3xl">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/global.agency.2026?igsh=MWs1Y2J1OHplczZidA==" target="_blank" class="text-gray-400 hover:text-[#E4405F] transition-all transform hover:scale-125 text-3xl">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/967781088588" target="_blank" class="text-gray-400 hover:text-[#25D366] transition-all transform hover:scale-125 text-3xl">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8 text-sm text-gray-500">
+            <p>2026 © جميع الحقوق محفوظة لـ Global Agency</p>
+            <div class="mt-4 flex justify-center space-x-reverse space-x-6">
+                <span class="flex items-center"><i class="fas fa-phone-alt ml-2 text-[#00A99D]"></i> 781088488</span>
+               
             </div>
         </div>
-    </section>
-
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold italic text-global mb-4">Global Agency</h2>
-            <div class="flex justify-center space-x-reverse space-x-8 mb-8 text-3xl">
-                <a href="https://facebook.com" target="_blank" class="hover:text-[#1877F2] transition-all"><i class="fab fa-facebook"></i></a>
-                <a href="https://instagram.com" target="_blank" class="hover:text-[#E4405F] transition-all"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/967781088588" target="_blank" class="hover:text-[#25D366] transition-all"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p class="text-gray-500 border-t border-gray-800 pt-8">2026 © جميع الحقوق محفوظة لـ Global Agency | 781088488 📞</p>
-        </div>
-    </footer>
-
-    <script>
-        function trackButtonClick(buttonId, eventLabel) {
-            var button = document.getElementById(buttonId);
-            if (button) {
-                button.addEventListener('click', function() {
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'click_contact_btn', {
-                            'event_category': 'Engagement',
-                            'event_label': eventLabel
-                        });
-                    }
-                    console.log('Event Sent: ' + eventLabel);
-                });
-            }
+    </div>
+</footer>
+<script>
+  // دالة مساعدة لإرسال الحدث
+  function trackButtonClick(buttonId, eventLabel) {
+    var button = document.getElementById(buttonId);
+    if (button) {
+      button.addEventListener('click', function() {
+        // إرسال البيانات لـ Google Analytics
+        if (typeof gtag === 'function') {
+          gtag('event', 'click_contact_btn', {
+            'event_category': 'Engagement',
+            'event_label': eventLabel
+          });
         }
-        trackButtonClick('nav-order-btn', 'Header Order Now');
-        trackButtonClick('hero-services-btn', 'Hero Explore');
-        trackButtonClick('hero-quote-btn', 'Hero Quote Request');
-    </script>
+        console.log('Tracked: ' + eventLabel); // للتأكد في الـ Console
+      });
+    }
+  }
+
+  // تفعيل التتبع للأزرار
+  trackButtonClick('nav-order-btn', 'Header Order Now');
+  trackButtonClick('hero-services-btn', 'Hero Explore Services');
+  trackButtonClick('hero-quote-btn', 'Hero Get Quote');
+</script>
 </body>
 </html>
+
