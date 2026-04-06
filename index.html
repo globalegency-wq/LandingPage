@@ -13,6 +13,37 @@
         --secondary-color: #F7931E; /* اللون البرتقالي */
         --white: #ffffff;
     }
+       /* خلفية هندسية رقمية للقسم الأول */
+.hero-bg {
+    background-color: #ffffff;
+    background-image:  
+        linear-gradient(135deg, rgba(0, 169, 157, 0.05) 25%, transparent 25%), 
+        linear-gradient(225deg, rgba(0, 169, 157, 0.05) 25%, transparent 25%), 
+        linear-gradient(45deg, rgba(0, 169, 157, 0.05) 25%, transparent 25%), 
+        linear-gradient(315deg, rgba(0, 169, 157, 0.05) 25%, #ffffff 25%);
+    background-position:  40px 0, 40px 0, 0 0, 0 0;
+    background-size: 80px 80px;
+    background-repeat: repeat;
+    position: relative;
+}
+
+/* إضافة طبقة ظلية هادئة لتركيز النص */
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
+    z-index: 1;
+}
+
+/* رفع محتوى القسم فوق الطبقة الظلية */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
        html {
     scroll-behavior: smooth;
 }
@@ -124,16 +155,24 @@
     </div>
 </header>
 
-    <section class="bg-white py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">نحول أفكارك الرقمية إلى <span class="text-global">واقع ملموس</span></h1>
-            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">وكالة جلوبال أجنسي للخدمات التقنية الرقمية - شريكك الموثوق في البرمجة، التسويق، وصناعة المحتوى الاحترافي.</p>
-            <div class="flex justify-center gap-4">
-               <a id="hero-services-btn" href="#services" class="bg-global text-white px-8 py-3 rounded-full text-lg font-bold hover:shadow-lg transition">استعرض خدماتنا</a>
-               <a id="hero-quote-btn" href="https://wa.me/967781088588" style="border-color:#00A99D" class="border-2 text-global px-8 py-3 rounded-full text-lg font-bold hover:shadow-lg transition">اطلب عرض سعر</a>
-            </div>
+ <section class="hero-bg py-24 md:py-32 reveal active">
+    <div class="container mx-auto px-6 text-center hero-content">
+        <h1 class="text-4xl md:text-6xl font-bold mb-8 text-[#002e5b] leading-tight">
+            نحول أفكارك الرقمية إلى <span class="text-[#00A99D]">واقع ملموس</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto italic font-medium">
+            وكالة جلوبال أجنسي للخدمات التقنية الرقمية - شريكك الموثوق في البرمجة والتسويق لنمو أعمالك.
+        </p>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+            <a href="#services" class="bg-[#00A99D] text-white px-10 py-4 rounded-full text-lg font-bold hover:shadow-2xl transition-all hover:scale-105 w-full md:w-auto text-center">
+                استعرض خدماتنا
+            </a>
+            <a href="https://wa.me/967781088588" style="border-color:#00A99D" class="border-2 text-[#00A99D] px-10 py-4 rounded-full text-lg font-bold hover:bg-[#00A99D] hover:text-white transition-all w-full md:w-auto text-center">
+                اطلب عرض سعر
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
    <section id="services" class="reveal py-24 bg-gray-50">
     <div class="container mx-auto px-6">
