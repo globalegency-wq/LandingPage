@@ -312,83 +312,80 @@
     </div>
 </footer>
 <script>
-  // دالة مساعدة لإرسال الحدث
-  function trackButtonClick(buttonId, eventLabel) {
-    var button = document.getElementById(buttonId);
-    if (button) {
-      button.addEventListener('click', function() {
-        // إرسال البيانات لـ Google Analytics
-        if (typeof gtag === 'function') {
-          gtag('event', 'click_contact_btn', {
-            'event_category': 'Engagement',
-            'event_label': eventLabel
-          });
-        }
-        console.log('Tracked: ' + eventLabel); // للتأكد في الـ Console
-      });
+    // 1. التحكم في قائمة الجوال (فتح/إغلاق مع التحريك)
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('nav-menu');
+    const icon = btn.querySelector('i');
+
+    if (btn && menu) {
+        btn.addEventListener('click', () => {
+            // تبديل كلاسات التحريك المخصصة في الـ CSS
+            menu.classList.toggle('menu-hidden');
+            menu.classList.toggle('menu-visible');
+            
+            // تغيير شكل الأيقونة من (ثلاثة خطوط) إلى (X)
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+        });
     }
-  }
 
-  // تفعيل التتبع للأزرار
-  trackButtonClick('nav-order-btn', 'Header Order Now');
-  trackButtonClick('hero-services-btn', 'Hero Explore Services');
-  trackButtonClick('hero-quote-btn', 'Hero Get Quote');
-    // اختيار جميع الروابط التي تبدأ بـ #
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault(); // منع القفز المفاجئ
-
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                // حساب المسافة مع مراعاة ارتفاع الهيدر الثابت
-                const headerOffset = 100; 
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth' // التمرير بسلاسة
-                });
+    // 2. إغلاق القائمة تلقائياً عند الضغط على أي رابط (لضمان تجربة مستخدم سلسة)
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+                menu.classList.add('menu-hidden');
+                menu.classList.remove('menu-visible');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
             }
         });
     });
+
+    // 3. تأثير ظهور الأقسام عند التمرير (Reveal Animation)
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
         for (var i = 0; i < reveals.length; i++) {
             var windowHeight = window.innerHeight;
             var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 150; // المسافة التي يبدأ عندها التأثير بالظهور
+            var elementVisible = 150; 
 
             if (elementTop < windowHeight - elementVisible) {
                 reveals[i].classList.add("active");
             }
         }
     }
-
-    // تشغيل الدالة عند التمرير
     window.addEventListener("scroll", reveal);
-    
-    // تشغيل الدالة مرة واحدة عند تحميل الصفحة لإظهار العناصر العلوية
-    window.onload = reveal;
-    const btn = document.getElementById('mobile-menu-button');
-    const menu = document.getElementById('nav-menu');
+    window.onload = reveal; // تشغيلها عند التحميل لإظهار القسم الأول فورا
 
-    // تبديل ظهور القائمة عند الضغط على الزر
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        menu.classList.toggle('flex');
+    // 4. التمرير السلس (Smooth Scroll) مع مراعاة ارتفاع الهيدر
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId !== "#") {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = 90; // تعويض ارتفاع الهيدر الثابت
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
     });
 
-    // إغلاق القائمة تلقائياً عند الضغط على أي رابط (للانتقال السلس)
-    const navLinks = document.querySelectorAll('#nav-menu a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth < 768) {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
-            }
+    // 5. تتبع النقرات (Console Log للتأكد قبل الرفع)
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            console.log('تم النقر على: ' + this.innerText + ' | الرابط: ' + this.href);
         });
     });
 </script>
