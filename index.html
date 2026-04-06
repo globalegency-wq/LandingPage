@@ -13,6 +13,21 @@
         --secondary-color: #F7931E; /* اللون البرتقالي */
         --white: #ffffff;
     }
+       html {
+    scroll-behavior: smooth;
+}
+       /* الحالة الابتدائية: مخفي ومنخفض قليلاً */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+/* الحالة عند التفعيل: يظهر ويرتفع لمكانه الطبيعي */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
     body {
         font-family: 'Tajawal', sans-serif; }
@@ -97,7 +112,7 @@
         </div>
     </section>
 
-   <section id="services" class="py-24 bg-gray-50">
+   <section id="services" class="reveal py-24 bg-gray-50">
     <div class="container mx-auto px-6">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-bold text-[#002e5b] mb-4">خدماتنا الشاملة</h2>
@@ -107,37 +122,37 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             
-            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+            <div class="reveal bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
                 <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">📢</div>
                 <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">التسويق الرقمي والميداني</h3>
                 <p class="text-gray-600 leading-relaxed">استراتيجيات ترويجية شاملة تصل لجمهورك عبر الإنترنت وعلى أرض الواقع وعبر منصات التواصل.</p>
             </div>
 
-            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+            <div class="reveal bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
                 <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🎨</div>
                 <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">صناعة المحتوى والهويات</h3>
                 <p class="text-gray-600 leading-relaxed">ابتكار محتوى جذاب وبناء هوية بصرية قوية تعكس قيم علامتك التجارية باحترافية.</p>
             </div>
 
-            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+            <div class="reveal bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
                 <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">📸</div>
                 <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">التصوير الرقمي والطباعة</h3>
                 <p class="text-gray-600 leading-relaxed">خدمات إنتاج مرئي احترافية وحلول طباعة متكاملة لجميع الحملات الإعلانية.</p>
             </div>
 
-            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+            <div class="reveal bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
                 <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🤖</div>
                 <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">الذكاء الاصطناعي والأتمتة</h3>
                 <p class="text-gray-600 leading-relaxed">توظيف تقنيات الذكاء الاصطناعي لتحسين تجربة العملاء وزيادة كفاءة الردود الآلية.</p>
             </div>
 
-            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+            <div class="reveal bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
                 <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🛒</div>
                 <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">التجارة الإلكترونية والبيانات</h3>
                 <p class="text-gray-600 leading-relaxed">تصميم وبناء المتاجر الإلكترونية مع إدارة قواعد بيانات دقيقة للعملاء المستهدفين.</p>
             </div>
 
-            <div class="bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
+            <div class="reveal bg-white p-8 rounded-3xl shadow-sm border-b-4 border-transparent hover:border-[#F7931E] hover:shadow-xl transition-all duration-300 group">
                 <div class="text-5xl mb-6 transform group-hover:scale-110 transition-transform">🚀</div>
                 <h3 class="text-2xl font-bold mb-4 text-[#002e5b]">إدارة محركات البحث (SEO)</h3>
                 <p class="text-gray-600 leading-relaxed">تحسين ظهور موقعك وتصدر النتائج الأولى في محركات البحث العالمية لزيادة الوصول.</p>
@@ -147,7 +162,7 @@
     </div>
 </section>
     
-    <section id="about" class="py-24 bg-white">
+    <section id="about" class="reveal py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row items-center gap-16">
             
@@ -256,6 +271,45 @@
   trackButtonClick('nav-order-btn', 'Header Order Now');
   trackButtonClick('hero-services-btn', 'Hero Explore Services');
   trackButtonClick('hero-quote-btn', 'Hero Get Quote');
+    // اختيار جميع الروابط التي تبدأ بـ #
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // منع القفز المفاجئ
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // حساب المسافة مع مراعاة ارتفاع الهيدر الثابت
+                const headerOffset = 100; 
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth' // التمرير بسلاسة
+                });
+            }
+        });
+    });
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150; // المسافة التي يبدأ عندها التأثير بالظهور
+
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+
+    // تشغيل الدالة عند التمرير
+    window.addEventListener("scroll", reveal);
+    
+    // تشغيل الدالة مرة واحدة عند تحميل الصفحة لإظهار العناصر العلوية
+    window.onload = reveal;
 </script>
 </body>
 </html>
