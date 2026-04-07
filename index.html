@@ -19,6 +19,13 @@
         --secondary-color: #b4382a; /* اللون البرتقالي */
         --white: #ffffff;
     }
+       .filter-btn { @apply px-6 py-2 rounded-full border border-[#004A99] text-[#004A99] hover:bg-[#004A99] hover:text-white transition-all font-bold; }
+    .active-btn { @apply bg-[#004A99] text-white; }
+    .portfolio-item { @apply relative overflow-hidden rounded-xl shadow-md h-64 hidden; } /* إخفاء الكل افتراضياً */
+    .portfolio-img { @apply w-full h-full object-cover transform hover:scale-110 transition-transform duration-500; }
+    .portfolio-overlay { @apply absolute inset-0 bg-[#004A99]/80 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-lg; }
+    .show { display: block !important; animation: fadeIn 0.5s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
        /* خلفية هندسية رقمية للقسم الأول */
 .hero-bg {
     background-color: #ffffff;
@@ -151,12 +158,13 @@
                 
                 <div class="flex flex-col md:flex-row items-center gap-y-4 md:gap-x-12 mb-6 md:mb-0">
                     <a href="#services" class="text-xl text-[#002e5b] hover:text-[#00A99D] transition-all">خدماتنا</a>
+                    <a href="#portfolio" class="text-xl text-[#002e5b] hover:text-[#00A99D] transition-all">أعمالنا</a>
                     <a href="#about" class="text-xl text-[#002e5b] hover:text-[#00A99D] transition-all">من نحن</a>
                 </div>
 
                 <a id="nav-order-btn" href="https://wa.me/967781088588" 
    class="bg-[#b4382a] text-white px-10 py-4 rounded-full font-bold shadow-lg 
-          hover:bg-[#D97D1A] transition-all hover:scale-105 text-center 
+          hover:bg-[#992c1d] transition-all hover:scale-105 text-center 
           w-full md:w-auto mt-4 md:mt-0 block md:inline-block">
     اطلب الآن
 </a>
@@ -233,6 +241,65 @@
     </div>
 </section>
     
+    <section id="portfolio" class="py-20 bg-gray-50 reveal">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#004A99] mb-4">نماذج من أعمالنا</h2>
+        
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <button onclick="filterSelection('all')" class="filter-btn active-btn">الكل</button>
+            <button onclick="filterSelection('branding')" class="filter-btn">هويات بصرية</button>
+            <button onclick="filterSelection('banners')" class="filter-btn">بانرات إعلانية</button>
+            <button onclick="filterSelection('posts')" class="filter-btn">بوستات </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="portfolio-item banners">
+                <img src="Images/Banner1.jpeg" alt="بانر 1" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span> Pizza بانر </span></div>
+            </div>
+            <div class="portfolio-item banners">
+                <img src="img/Banner2.jpeg" alt="بانر 2" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span> Burger restaurant بانر</span></div>
+            </div>
+            <div class="portfolio-item banners">
+                <img src="img/Banner3.jpeg" alt="بانر 3" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span> Smile Golden بانر</span></div>
+            </div>
+
+            <div class="portfolio-item banners">
+                <img src="img/banner-1.jpg" alt="بانر 1" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span>بانر سوشيال ميديا</span></div>
+            </div>
+            <div class="portfolio-item banners">
+                <img src="img/banner-2.jpg" alt="بانر 2" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span>تصميم إعلان ممول</span></div>
+            </div>
+            <div class="portfolio-item banners">
+                <img src="img/banner-3.jpg" alt="بانر 3" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span>بانر واجهة محل</span></div>
+            </div>
+
+            <div class="portfolio-item coding">
+                <img src="img/code-1.jpg" alt="برمجة 1" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span>برمجة متجر إلكتروني</span></div>
+            </div>
+            <div class="portfolio-item coding">
+                <img src="img/code-2.jpg" alt="برمجة 2" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span>نظام CRM مخصص</span></div>
+            </div>
+            <div class="portfolio-item coding">
+                <img src="img/code-3.jpg" alt="برمجة 3" class="portfolio-img" loading="lazy">
+                <div class="portfolio-overlay"><span>تطبيق هاتف ذكي</span></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    
+
     <section id="about" class="reveal py-24 bg-white">
     <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row items-center gap-16">
@@ -296,7 +363,7 @@
    <footer class="bg-[#b4382a] text-white py-12">
     <div class="container mx-auto px-6 text-center">
         <div class="mb-8">
-            <h2 class="text-3xl font-bold italic text-[#00A99D]">Global Agency</h2>
+            <h2 class="text-3xl font-bold italic text-[#FFFFFF]">Global Agency</h2>
             <p class="text-[#FFFFFF] mt-2">نحول أفكارك الرقمية إلى واقع ملموس</p>
         </div>
 
@@ -315,7 +382,7 @@
         <div class="border-t border-[#FFFFFF]-800 pt-8 text-sm text-[#FFFFFF]">
             <p>2026 © جميع الحقوق محفوظة لـ Global Agency</p>
             <div class="mt-4 flex justify-center space-x-reverse space-x-6">
-                <span class="flex items-center"> 781088488</span><i class="fas fa-phone-alt ml-2 text-[#00A99D]"></i>
+                <span class="flex items-center"><i class="fas fa-phone-alt ml-2 text-[#FFFFF]"></i> 781088488</span><i class="fas fa-phone-alt ml-2 text-[#00A99D]"></i>
                
             </div>
         </div>
@@ -354,7 +421,36 @@
             }
         });
     });
+function filterSelection(category) {
+    const items = document.getElementsByClassName("portfolio-item");
+    const buttons = document.getElementsByClassName("filter-btn");
 
+    // تحديث شكل الأزرار
+    for (let btn of buttons) {
+        btn.classList.remove("active-btn");
+        if (btn.innerText.includes(getCategoryName(category))) btn.classList.add("active-btn");
+    }
+
+    // إظهار وإخفاء العناصر
+    for (let item of items) {
+        if (category === "all" || item.classList.contains(category)) {
+            item.classList.add("show");
+        } else {
+            item.classList.remove("show");
+        }
+    }
+}
+
+// دالة مساعدة لتحديد الزر النشط
+function getCategoryName(cat) {
+    if (cat === "all") return "الكل";
+    if (cat === "branding") return "هويات";
+    if (cat === "banners") return "بانرات";
+    if (cat === "coding") return "برمجية";
+}
+
+// تشغيل الفلتر على "الكل" عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", () => filterSelection('all'));
     // 3. تأثير ظهور الأقسام عند التمرير (Reveal Animation)
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
