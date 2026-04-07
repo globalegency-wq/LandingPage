@@ -397,6 +397,25 @@
             console.log('تم النقر على: ' + this.innerText + ' | الرابط: ' + this.href);
         });
     });
+    window.addEventListener('load', () => {
+    const timing = window.performance.timing;
+    // حساب وقت استجابة السيرفر (TTFB)
+    const serverResponseTime = timing.responseStart - timing.requestStart;
+    // حساب الوقت الإجمالي لتحميل الصفحة بالكامل
+    const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+
+    console.log(`🚀 سرعة استجابة السيرفر: ${serverResponseTime}ms`);
+    console.log(`⏱️ وقت تحميل الصفحة الكامل: ${pageLoadTime}ms`);
+    
+    // إذا كنت تريد إرسالها لـ Vercel أو Analytics برمجياً
+    if (typeof gtag === 'function') {
+        gtag('event', 'timing_complete', {
+            'name': 'load_time',
+            'value': pageLoadTime,
+            'event_category': 'Page Speed'
+        });
+    }
+});
 </script>
 </body>
 </html>
