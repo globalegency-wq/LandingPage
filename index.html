@@ -39,7 +39,13 @@
     background-repeat: repeat;
     position: relative;
 }
+.portfolio-item {
+    display: none; /* إخفاء الكل افتراضياً */
+}
 
+.portfolio-item.show {
+    display: block; /* إظهار فقط من لديه كلاس show */
+}
 /* إضافة طبقة ظلية هادئة لتركيز النص */
 .hero-bg::after {
     content: '';
@@ -243,7 +249,7 @@
     
     <section id="portfolio" class="py-20 bg-gray-50 reveal">
     <div class="container mx-auto px-6 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#004A99] mb-4">نماذج من أعمالنا</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-[#002e5b] mb-4">نماذج من أعمالنا</h2>
         
         <div class="flex flex-wrap justify-center gap-4 mb-12">
             <button onclick="filterSelection('all')" class="filter-btn active-btn">الكل</button>
@@ -254,68 +260,68 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            <div class="portfolio-item banners">
-                <img src="Images/Banner1.jpeg" alt="Pizza بانر" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span> Pizza بانر </span></div>
+            <div class="portfolio-item banners show">
+                <img src="Images/Banner1.jpeg" alt="بانر Pizza" class="portfolio-img" loading="lazy">
+               // <div class="portfolio-overlay"><span>بانر Pizza  </span></div>
             </div>
-            <div class="portfolio-item banners">
-                <img src="Images/Banner2.jpeg" alt="Burger restaurant بانر" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span> Burger restaurant بانر</span></div>
+            <div class="portfolio-item banners show">
+                <img src="Images/Banner2.jpeg" alt="بانر Burger restaurant" class="portfolio-img" loading="lazy">
+                //<div class="portfolio-overlay"><span> بانر Burger restaurant </span></div>
             </div>
-            <div class="portfolio-item banners">
-                <img src="Images/Banner3.jpeg" alt="Smile Golden بانر" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span> Smile Golden بانر</span></div>
+            <div class="portfolio-item banners show">
+                <img src="Images/Banner3.jpeg" alt="بانر Smile Golden " class="portfolio-img" loading="lazy">
+               // <div class="portfolio-overlay"><span>بانر Smile Golden </span></div>
             </div>
 
             
-            <div class="portfolio-item branding">
+            <div class="portfolio-item branding show">
                 <img src="Images/Identity2.jpg" alt="لوقو همة" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>لوقو همة</span></div>
+               // <div class="portfolio-overlay"><span>لوقو همة</span></div>
             </div>
-            <div class="portfolio-item branding">
+            <div class="portfolio-item branding show">
                 <img src="Images/Identity3.jpg" alt="فلسفة شعار همة" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>فلسفة شعار همة</span></div>
+              //  <div class="portfolio-overlay"><span>فلسفة شعار همة</span></div>
             </div>
-            <div class="portfolio-item branding">
+            <div class="portfolio-item branding show">
                 <img src="Images/Identity4.jpg" alt=" ورق ظرف مراسلات همة" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>ورق ظرف مراسلات همة</span></div>
+              //  <div class="portfolio-overlay"><span>ورق ظرف مراسلات همة</span></div>
             </div>
-            <div class="portfolio-item branding">
+            <div class="portfolio-item branding show">
                 <img src="Images/Identity9.jpg" alt="ختم همة" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>ختم همة</span></div>
+              //  <div class="portfolio-overlay"><span>ختم همة</span></div>
             </div>
-            <div class="portfolio-item branding">
-                <img src="Images/Identity11.jpg" alt="منيو مشويات المضياف1" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>منيو مشويات المضياف1</span></div>
+            <div class="portfolio-item branding show">
+                <img src="Images/Identity11.jpg" alt="منيو مشويات المضياف" class="portfolio-img" loading="lazy">
+              //  <div class="portfolio-overlay"><span>منيو مشويات المضياف</span></div>
             </div>
-            <div class="portfolio-item branding">
-                <img src="Images/Identity22.jpg" alt="منيو مشويات المضياف2" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>منيو مشويات المضياف2</span></div>
+            <div class="portfolio-item branding show">
+                <img src="Images/Identity22.jpg" alt="منيو مشويات المضياف" class="portfolio-img" loading="lazy">
+              //  <div class="portfolio-overlay"><span>منيو مشويات المضياف</span></div>
             </div>
-            <div class="portfolio-item branding">
-                <img src="Images/Identity33.jpg" alt="منيو مشويات المضياف3" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>منيو مشويات المضياف3</span></div>
+            <div class="portfolio-item branding show">
+                <img src="Images/Identity33.jpg" alt="منيو مشويات المضياف" class="portfolio-img" loading="lazy">
+              //  <div class="portfolio-overlay"><span>منيو مشويات المضياف</span></div>
             </div>
-            <div class="portfolio-item branding">
-                <img src="Images/Identity44.jpg" alt="منيو مشويات المضياف4" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>4منيو مشويات المضياف</span></div>
+            <div class="portfolio-item branding show">
+                <img src="Images/Identity44.jpg" alt="منيو مشويات المضياف" class="portfolio-img" loading="lazy">
+              //  <div class="portfolio-overlay"><span>منيو مشويات المضياف</span></div>
             </div>
-            <div class="portfolio-item branding">
+            <div class="portfolio-item branding show">
                 <img src="Images/Identity111.png" alt="هوية فندق سلس" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>هوية فندق سلس</span></div>
+               // <div class="portfolio-overlay"><span>هوية فندق سلس</span></div>
             </div>
 
-            <div class="portfolio-item posts">
+            <div class="portfolio-item posts show">
                 <img src="Images/Design.jpg" alt="الوكالة العالمية للتسويق والتوكيلات" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>الوكالة العالمية للتسويق والتوكيلات</span></div>
+               // <div class="portfolio-overlay"><span>الوكالة العالمية للتسويق والتوكيلات</span></div>
             </div>
-            <div class="portfolio-item posts">
-                <img src="Images/code-2.jpg" alt="مشويات المضياف" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>مشويات المضياف</span></div>
+            <div class="portfolio-item posts show">
+                <img src="Images/Design2.png" alt="مشويات المضياف" class="portfolio-img" loading="lazy">
+               // <div class="portfolio-overlay"><span>مشويات المضياف</span></div>
             </div>
-            <div class="portfolio-item posts">
-                <img src="Images/code-3.jpg" alt="مشويات المضياف" class="portfolio-img" loading="lazy">
-                <div class="portfolio-overlay"><span>مشويات المضياف</span></div>
+            <div class="portfolio-item posts show">
+                <img src="Images/Design3.png" alt="مشويات المضياف" class="portfolio-img" loading="lazy">
+               // <div class="portfolio-overlay"><span>مشويات المضياف</span></div>
             </div>
 
         </div>
@@ -447,24 +453,25 @@
         });
     });
 function filterSelection(category) {
+    console.log("القسم المختار حالياً: " + category); // للفحص في الـ Console
+    
     const items = document.getElementsByClassName("portfolio-item");
-    const buttons = document.getElementsByClassName("filter-btn");
-
-    // تحديث شكل الأزرار
-    for (let btn of buttons) {
-        btn.classList.remove("active-btn");
-        if (btn.innerText.includes(getCategoryName(category))) btn.classList.add("active-btn");
-    }
-
-    // إظهار وإخفاء العناصر
-    for (let item of items) {
-        if (category === "all" || item.classList.contains(category)) {
-            item.classList.add("show");
-        } else {
-            item.classList.remove("show");
+    
+    for (let i = 0; i < items.length; i++) {
+        // إزالة كلاس show أولاً
+        items[i].classList.remove("show");
+        
+        // إذا كان المختار 'الكل' أو الكلاس موجود في العنصر
+        if (category === 'all' || items[i].classList.contains(category)) {
+            items[i].classList.add("show");
         }
     }
 }
+
+// تأكد من تشغيلها عند التحميل
+window.onload = function() {
+    filterSelection('all');
+};
 
 // دالة مساعدة لتحديد الزر النشط
 function getCategoryName(cat) {
