@@ -1,39 +1,44 @@
+const https = require('https');
+
 module.exports = async (req, res) => {
-  // تفعيل خيارات الوصول CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    // تفعيل CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    if (req.method === 'OPTIONS') return res.status(200).end();
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+    if (req.method !== 'POST') return res.status(405).json({ error: "Method Not Allowed" });
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: "الطريقة غير مسموح بها" });
-  }
+    const { name, email, message } = req.body;
+    const postData = JSON.stringify({ name, email, message });
 
-  const { name, email, message } = req.body;
+    // استخراج الدومين من الرابط (حذف https://)
+    const supabaseHost = process.env.SUPABASE_URL.replace('https://', '');
 
-  try {
-    // الاتصال المباشر بـ API الخاص بـ Supabase
-    const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/contacts`, {
-      method: 'POST',
-      headers: {
-        'apikey': process.env.SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({ name, email, message })
+    const options = {
+        hostname: supabaseHost,
+        path: '/rest/v1/contacts',
+        method: 'POST',
+        headers: {
+            'apikey': process.env.SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal',
+            'Content-Length': Buffer.byteLength(postData)
+        }
+    };
+
+    const request = https.request(options, (response) => {
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+            res.status(200).json({ success: true, message: "تم الإرسال بنجاح!" });
+        } else {
+            res.status(response.statusCode).json({ error: "خطأ من Supabase" });
+        }
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "فشل الاتصال بقاعدة البيانات");
-    }
+    request.on('error', (e) => {
+        res.status(500).json({ error: e.message });
+    });
 
-    return res.status(200).json({ success: true, message: "تم إرسال طلبك بنجاح!" });
-  } catch (err) {
-    console.error("خطأ في المعالجة:", err.message);
-    return res.status(400).json({ success: false, error: err.message });
-  }
+    request.write(postData);
+    request.end();
 };
