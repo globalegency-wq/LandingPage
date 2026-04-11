@@ -382,6 +382,45 @@
     </div>
 </section>
     
+ <section id="contact-section" style="padding: 60px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; direction: rtl;">
+    <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
+        
+        <h2 style="color: #2d3436; font-size: 2.5rem; margin-bottom: 10px;">تواصل معنا</h2>
+        <p style="color: #636e72; margin-bottom: 40px;">نحن هنا في **Global Agency** للإجابة على استفساراتك وبناء نجاحك القادم.</p>
+
+        <div class="form-wrapper" style="background: #ffffff; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <form id="contactForm">
+                <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                    <div style="flex: 1; text-align: right;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">الاسم الكامل</label>
+                        <input type="text" name="name" placeholder="أدخل اسمك هنا" required 
+                               style="width: 100%; padding: 12px; border: 1px solid #dfe6e9; border-radius: 8px; outline: none;">
+                    </div>
+                    <div style="flex: 1; text-align: right;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: bold;">البريد الإلكتروني</label>
+                        <input type="email" name="email" placeholder="example@gmail.com" required 
+                               style="width: 100%; padding: 12px; border: 1px solid #dfe6e9; border-radius: 8px; outline: none;">
+                    </div>
+                </div>
+
+                <div style="text-align: right; margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">تفاصيل الرسالة</label>
+                    <textarea name="message" placeholder="كيف يمكننا مساعدتك؟" required rows="5" 
+                              style="width: 100%; padding: 12px; border: 1px solid #dfe6e9; border-radius: 8px; outline: none; resize: vertical;"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" 
+                        style="background: #00b894; color: white; border: none; padding: 15px 40px; font-size: 1.1rem; border-radius: 30px; cursor: pointer; transition: 0.3s; width: 100%;">
+                    إرسال الطلب الآن
+                </button>
+            </form>
+
+            <div id="statusMessage" style="margin-top: 20px; font-weight: bold; display: none;"></div>
+        </div>
+    </div>
+</section>
+<div id="responseMessage"></div>
+
    <footer class="bg-[#b4382a] text-white py-12">
     <div class="container mx-auto px-6 text-center">
         <div class="mb-8">
@@ -534,6 +573,35 @@ document.addEventListener("DOMContentLoaded", () => filterSelection('all'));
             'value': pageLoadTime,
             'event_category': 'Page Speed'
         });
+    }
+});
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const responseDiv = document.getElementById('responseMessage');
+    responseDiv.innerText = "جاري الإرسال...";
+
+    // تجميع البيانات من النموذج
+    const formData = new FormData(e.target);
+    const bodyData = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch('/api/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodyData)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            responseDiv.style.color = "green";
+            responseDiv.innerText = result.message;
+            e.target.reset(); // تفريغ النموذج بعد النجاح
+        } else {
+            throw new Error(result.error);
+        }
+    } catch (err) {
+        responseDiv.style.color = "red";
+        responseDiv.innerText = "حدث خطأ: " + err.message;
     }
 });
 </script>
