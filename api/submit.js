@@ -6,19 +6,42 @@ const supabase = createClient(
 );
 
 module.exports = async (req, res) => {
+  // تفعيل CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
   if (req.method === 'POST') {
     try {
+      // استخراج البيانات والتأكد من وجودها
       const { name, email, message } = req.body;
+
+      if (!name || !email) {
+        return res.status(400).json({ error: "الاسم والبريد مطلوبان" });
+      }
+
+      // محاولة الإدخال في الجدول
       const { data, error } = await supabase
         .from('contacts')
-        .insert([{ name, email, message }]);
+        .insert([
+          { 
+            name: name, 
+            email: email, 
+            message: message 
+          }
+        ]);
 
-      if (error) throw error;
-      return res.status(200).json({ success: true, message: 'تم الإرسال بنجاح' });
+      if (error) {
+        console.error("Supabase Error:", error.message);
+        return res.status(400).json({ error: error.message });
+      }
+
+      return res.status(200).json({ success: true, message: 'تم الإرسال بنجاح!' });
+
     } catch (err) {
-      return res.status(500).json({ success: false, error: err.message });
+      console.error("Server Error:", err.message);
+      return res.status(500).json({ error: "حدث خطأ في السيرفر: " + err.message });
     }
   } else {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ error: "Method Not Allowed" });
   }
 };
