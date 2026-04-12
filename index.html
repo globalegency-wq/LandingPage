@@ -528,6 +528,29 @@
             }
         });
     });
+    // وظيفة لالتقاط المعلمات من الرابط
+function getSourceFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('source') || 'website';
+}
+
+// عند إرسال النموذج، تأكد من إرسال المصدر
+async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        message: document.getElementById('message').value,
+        lead_source: getSourceFromURL() // التقاط المصدر هنا
+    };
+
+    const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    });
+    // ... باقي كود معالجة الرد
+}
 function filterSelection(category) {
     console.log("القسم المختار حالياً: " + category); // للفحص في الـ Console
     
