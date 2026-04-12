@@ -1,10 +1,8 @@
 module.exports = async (req, res) => {
-  // إعدادات الوصول
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  const { name, email, message, phone, lead_source } = req.body;
 
-  const { name, email, message } = req.body;
+  // القيمة الافتراضية إذا كان المصدر فارغاً هي website
+  const source = lead_source || 'website';
 
   try {
     const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/contacts`, {
@@ -15,15 +13,18 @@ module.exports = async (req, res) => {
         'Content-Type': 'application/json',
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify({ name, email, message })
+      body: JSON.stringify({ 
+        name, 
+        email, 
+        message, 
+        phone, 
+        lead_source: source // تخزين مصدر العميل هنا
+      })
     });
 
-    if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.message || "فشل في قاعدة البيانات");
-    }
+    if (!response.ok) throw new Error("فشل في تخزين البيانات");
 
-    return res.status(200).json({ success: true, message: "تم بنجاح" });
+    return res.status(200).json({ success: true, source_detected: source });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
