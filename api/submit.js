@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
 
   // --- بيانات التنبيه (استبدل القيم هنا) ---
   const TELEGRAM_TOKEN = '8363195341:AAFwOMBdtTn9JSdn7tYWT75cXwjdLv4ytxo';
-  const CHAT_ID = '824678466'
+  const CHAT_ID = '8389021637'
   try {
     // 1. تخزين البيانات في Supabase
     const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/contacts`, {
