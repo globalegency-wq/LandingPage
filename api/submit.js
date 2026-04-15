@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
     // 2. إرسال التنبيه الفوري لتليجرام (الجزء الجديد)
     const alertText = `🚨 **عميل جديد لـ Global Agency**\n\n` +
                       `👤 الاسم: ${name}\n` +
-                      `📞 الهاتف: ${email\n` +
+                      `📞 الهاتف : https://wa.me/${phone}\n` +
                       `💼 الرسالة: ${message}\n` +
                       `🌍 المصدر: ${source}\n` +
                       `🕒 التاريخ: ${new Date().toLocaleString('ar-YE')}`;
