@@ -673,7 +673,39 @@ document.addEventListener("DOMContentLoaded", () => filterSelection('all'));
         });
     }
 });
+// تتبع أي قسم يضغط عليه الزائر في القائمة
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function() {
+        const sectionName = this.innerText;
+        // إرسال الحدث لـ Vercel Analytics
+        if (window.va) {
+            window.va('event', { name: 'section_view', data: { section: sectionName } });
+        }
+        console.log("الزائر مهتم بقسم: " + sectionName);
+    });
+});
+    const observerOptions = {
+    threshold: 0.6 // إذا ظهر 60% من القسم، اعتبره "تمت زيارته"
+};
 
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            console.log("الزائر يقرأ الآن قسم: " + sectionId);
+            
+            // إرسال البيانات لـ Vercel
+            if (window.va) {
+                window.va('event', { name: 'scroll_to_section', data: { id: sectionId } });
+            }
+        }
+    });
+}, observerOptions);
+
+// نراقب الأقسام الرئيسية في موقعك
+document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+});
 </script>
 </body>
 </html>
