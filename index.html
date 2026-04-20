@@ -483,7 +483,8 @@
                 email: document.getElementById('email').value,
                 message: document.getElementById('message').value,
                 phone: document.getElementById('phone').value, // تأكد من وجود حقل الهاتف
-                lead_source: document.getElementById('lead_source').value
+                lead_source: document.getElementById('lead_source').value,
+                interest_score: localStorage.getItem('user_score') || 0
             };
 
             const response = await fetch('/api/submit', {
