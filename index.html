@@ -494,6 +494,26 @@
             // ... باقي منطق الرد التلقائي الذي صممناه اليوم
         });
     }
+    // دالة لزيادة النقاط وتخزينها
+function increaseScore(points) {
+    let currentScore = parseInt(localStorage.getItem('user_score')) || 0;
+    localStorage.setItem('user_score', currentScore + points);
+}
+
+// أمثلة لتفعيل التتبع:
+// 1. عند النقر على تحميل البروفايل
+document.getElementById('downloadBtn').addEventListener('click', () => increaseScore(25));
+
+// 2. عند قضاء 30 ثانية في الموقع
+setTimeout(() => increaseScore(15), 30000);
+
+// 3. عند الوصول لأسفل صفحة الخدمات
+window.onscroll = function() {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        increaseScore(10);
+        window.onscroll = null; // للتنفيذ مرة واحدة فقط
+    }
+};
 </script>
 
    <footer class="bg-[#b4382a] text-white py-12">
