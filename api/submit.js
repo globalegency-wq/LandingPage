@@ -1,12 +1,15 @@
 module.exports = async (req, res) => {
-  const { name, email, message, phone, lead_source } = req.body;
+  // 1. استقبال البيانات من الطلب (أضفنا interest_score هنا)
+  const { name, email, message, phone, lead_source, interest_score } = req.body;
   const source = lead_source || 'website';
+  // التأكد من تحويل النقاط لرقم، وإذا لم توجد نضع 0
+  const score = parseInt(interest_score) || 0; 
 
-  // --- بيانات التنبيه (استبدل القيم هنا) ---
   const TELEGRAM_TOKEN = '8363195341:AAFwOMBdtTn9JSdn7tYWT75cXwjdLv4ytxo';
-  const CHAT_ID = '8389021637'
+  const CHAT_ID = '8389021637';
+
   try {
-    // 1. تخزين البيانات في Supabase
+    // 2. تخزين البيانات في Supabase (تم إضافة interest_score للـ body)
     const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/contacts`, {
       method: 'POST',
       headers: {
@@ -20,16 +23,21 @@ module.exports = async (req, res) => {
         email, 
         message, 
         phone, 
-        lead_source: source 
+        lead_source: source,
+        interest_score: score // إرسال النقاط المحفوظة إلى العمود الجديد
       })
     });
 
     if (!response.ok) throw new Error("فشل في تخزين البيانات");
 
-    // 2. إرسال التنبيه الفوري لتليجرام (الجزء الجديد)
+    // 3. إرسال التنبيه الفوري لتليجرام (أضفنا تقييم العميل في الرسالة)
+    // تحديد "درجة الحرارة" للعميل بناءً على النقاط
+    const leadStatus = score >= 70 ? "🔥 مهتم جداً" : score >= 30 ? "⚡ مهتم" : "❄️ بارد";
+
     const alertText = `🚨 **عميل جديد لـ Global Agency**\n\n` +
                       `👤 الاسم: ${name}\n` +
-                      `📞 الهاتف : https://wa.me/${email}\n` +
+                      `📞 الهاتف: https://wa.me/${phone}\n` +
+                      `📊 تقييم الاهتمام: ${score} (${leadStatus})\n` + // إضافة النقاط هنا
                       `💼 الرسالة: ${message}\n` +
                       `🌍 المصدر: ${source}\n` +
                       `🕒 التاريخ: ${new Date().toLocaleString('ar-YE')}`;
