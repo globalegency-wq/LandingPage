@@ -442,13 +442,13 @@
         btn.innerText = "جاري معالجة طلبك...";
 
         // جمع البيانات باستخدام الأسماء الموجودة في الـ HTML
-        const data = {
-            name: e.target.name.value,
-            email: e.target.email.value, // هذا هو حقل الهاتف 
-            message: e.target.message.value,
-            lead_source: document.getElementById('lead_source').value,
-            interest_score: localStorage.getItem('user_score') || 0
-        };
+       const data = {
+    name: e.target.name.value,
+    email: e.target.email.value, // الهاتف المدخل في خانة الـ email
+    message: e.target.message.value,
+    lead_source: document.getElementById('lead_source').value || 'website',
+    interest_score: localStorage.getItem('user_score') || 0
+};
 
         try {
             const response = await fetch('/api/submit', {
