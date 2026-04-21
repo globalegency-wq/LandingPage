@@ -496,25 +496,29 @@
         });
     }
     // دالة لزيادة النقاط وتخزينها
+// دالة لزيادة النقاط وتخزينها
 function increaseScore(points) {
     let currentScore = parseInt(localStorage.getItem('user_score')) || 0;
     localStorage.setItem('user_score', currentScore + points);
+    console.log("النقاط الحالية: " + localStorage.getItem('user_score')); // للفحص فقط
 }
 
-// أمثلة لتفعيل التتبع:
-// 1. عند النقر على تحميل البروفايل
-document.getElementById('downloadBtn').addEventListener('click', () => increaseScore(25));
+// أتمتة زيادة النقاط بناءً على السلوك:
+// 1. بمجرد فتح الموقع (نقاط دخول)
+if (!localStorage.getItem('user_score')) increaseScore(10);
 
-// 2. عند قضاء 30 ثانية في الموقع
-setTimeout(() => increaseScore(15), 30000);
+// 2. عند قضاء دقيقة كاملة في الموقع (اهتمام زمني)
+setTimeout(() => increaseScore(20), 60000);
 
-// 3. عند الوصول لأسفل صفحة الخدمات
-window.onscroll = function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        increaseScore(10);
-        window.onscroll = null; // للتنفيذ مرة واحدة فقط
+// 3. عند الوصول لنهاية قسم "نماذج أعمالنا" (اهتمام بالمحتوى)
+const portfolioSection = document.getElementById('portfolio');
+const observerScore = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        increaseScore(15);
+        observerScore.disconnect(); // زيادة مرة واحدة فقط
     }
-};
+}, { threshold: 0.5 });
+observerScore.observe(portfolioSection);
 </script>
 
    <footer class="bg-[#b4382a] text-white py-12">
