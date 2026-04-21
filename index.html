@@ -422,40 +422,8 @@
         </div>
     </div>
 </section>
-
-
-
-   <footer class="bg-[#b4382a] text-white py-12">
-    <div class="container mx-auto px-6 text-center">
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold italic text-[#FFFFFF]">Global Agency</h2>
-            <p class="text-[#FFFFFF] mt-2">نحول أفكارك الرقمية إلى واقع ملموس</p>
-        </div>
-
-        <div class="flex justify-center space-x-reverse space-x-8 mb-8">
-            <a href="https://www.facebook.com/share/1Ec8oNiDFm/" target="_blank" class="text-[#FFFFFF] hover:text-[#1877F2] transition-all transform hover:scale-125 text-3xl">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/global.agency.2026?igsh=MWs1Y2J1OHplczZidA==" target="_blank" class="text-[#FFFFFF] hover:text-[#E4405F] transition-all transform hover:scale-125 text-3xl">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://wa.me/967781088588" target="_blank" class="text-[#FFFFFF] hover:text-[#25D366] transition-all transform hover:scale-125 text-3xl">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        </div>
-
-        <div class="border-t border-[#FFFFFF]-800 pt-8 text-sm text-[#FFFFFF]">
-            <p>2026 © جميع الحقوق محفوظة لـ Global Agency</p>
-            <div class="mt-4 flex justify-center space-x-reverse space-x-6">
-                <span class="flex items-center"><i class="fas fa-phone-alt ml-2 text-[#FFFFF]"></i> 781088488 - 781088588</span>
-               
-            </div>
-        </div>
-    </div>
-</footer>
 <script>
-
-    // 1. نظام النقاط التلقائي (يوضع هنا ليعمل بمجرد تحميل الصفحة)
+        // 1. نظام النقاط التلقائي (يوضع هنا ليعمل بمجرد تحميل الصفحة)
     function increaseScore(points) {
         let currentScore = parseInt(localStorage.getItem('user_score')) || 0;
         localStorage.setItem('user_score', currentScore + points);
@@ -524,6 +492,40 @@
 
     // 3. كود تحريك القائمة والظهور (Reveal)
     // (ضعه هنا أيضاً ليكون كل شيء في مكان واحد)
+
+</script>
+
+
+   <footer class="bg-[#b4382a] text-white py-12">
+    <div class="container mx-auto px-6 text-center">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold italic text-[#FFFFFF]">Global Agency</h2>
+            <p class="text-[#FFFFFF] mt-2">نحول أفكارك الرقمية إلى واقع ملموس</p>
+        </div>
+
+        <div class="flex justify-center space-x-reverse space-x-8 mb-8">
+            <a href="https://www.facebook.com/share/1Ec8oNiDFm/" target="_blank" class="text-[#FFFFFF] hover:text-[#1877F2] transition-all transform hover:scale-125 text-3xl">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/global.agency.2026?igsh=MWs1Y2J1OHplczZidA==" target="_blank" class="text-[#FFFFFF] hover:text-[#E4405F] transition-all transform hover:scale-125 text-3xl">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/967781088588" target="_blank" class="text-[#FFFFFF] hover:text-[#25D366] transition-all transform hover:scale-125 text-3xl">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="border-t border-[#FFFFFF]-800 pt-8 text-sm text-[#FFFFFF]">
+            <p>2026 © جميع الحقوق محفوظة لـ Global Agency</p>
+            <div class="mt-4 flex justify-center space-x-reverse space-x-6">
+                <span class="flex items-center"><i class="fas fa-phone-alt ml-2 text-[#FFFFF]"></i> 781088488 - 781088588</span>
+               
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+
 
     // 1. التحكم في قائمة الجوال (فتح/إغلاق مع التحريك)
     const btn = document.getElementById('mobile-menu-button');
