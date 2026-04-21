@@ -1,6 +1,6 @@
 module.exports = async (req, res) => {
   // 1. استقبال البيانات من الطلب (أضفنا interest_score هنا)
-  const { name, email, message, phone, lead_source, interest_score } = req.body;
+  const { name, email, message,  lead_source, interest_score } = req.body;
   const source = lead_source || 'website';
   // التأكد من تحويل النقاط لرقم، وإذا لم توجد نضع 0
   const score = parseInt(interest_score) || 0; 
@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         name, 
         email, 
         message, 
-        phone, 
+       
         lead_source: source,
         interest_score: score // إرسال النقاط المحفوظة إلى العمود الجديد
       })
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
 
     const alertText = `🚨 **عميل جديد لـ Global Agency**\n\n` +
                       `👤 الاسم: ${name}\n` +
-                      `📞 الهاتف: https://wa.me/${phone}\n` +
+                      `📞 الهاتف: https://wa.me/${email}\n` +
                       `📊 تقييم الاهتمام: ${score} (${leadStatus})\n` + // إضافة النقاط هنا
                       `💼 الرسالة: ${message}\n` +
                       `🌍 المصدر: ${source}\n` +
