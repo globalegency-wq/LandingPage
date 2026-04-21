@@ -426,99 +426,43 @@
 <script>
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('statusMessage');
         
-        // تغيير حالة الزر أثناء الإرسال
         btn.disabled = true;
-        btn.innerText = "جاري معالجة طلبك...";
-        btn.style.background = "#b2bec3";
+        btn.innerText = "جاري الإرسال...";
 
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
+        const data = {
+            name: e.target.name.value,
+            email: e.target.email.value, // الهاتف المدخل
+            message: e.target.message.value,
+            lead_source: document.getElementById('lead_source').value || 'website'
+        };
 
         try {
-            const response = await fetch('api/submit', {
+            const response = await fetch('/api/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
 
-            const result = await response.json();
-
             status.style.display = "block";
             if (response.ok) {
                 status.style.color = "#00b894";
-                status.innerText = " تم ارسال طلبك بنجاح ✅ وسيتم التواصل معك في اقل من 24 ساعة";
+                status.innerText = "✅ تم الإرسال بنجاح!";
                 e.target.reset();
             } else {
-                throw new Error(result.error || "فشل الإرسال");
+                throw new Error("حدث خطأ في السيرفر");
             }
         } catch (error) {
             status.style.display = "block";
             status.style.color = "#d63031";
-            status.innerText = "❌ عذراً، حدث خطأ: " + error.message;
+            status.innerText = "❌ فشل الإرسال، حاول لاحقاً";
         } finally {
             btn.disabled = false;
             btn.innerText = "إرسال الطلب الآن";
-            btn.style.background = "#00b894";
         }
     });
-   
-    // التقاط المصدر من الرابط (مثلاً ?source=facebook)
-    const urlParams = new URLSearchParams(window.location.search);
-    const source = urlParams.get('source');
-    if (source) {
-        document.getElementById('lead_source').value = source;
-    }
-
-    // تحديث وظيفة الإرسال لتشمل المصدر
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value,
-                phone: document.getElementById('phone').value, // تأكد من وجود حقل الهاتف
-                lead_source: document.getElementById('lead_source').value,
-                interest_score: localStorage.getItem('user_score') || 0
-            };
-
-            const response = await fetch('/api/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-            // ... باقي منطق الرد التلقائي الذي صممناه اليوم
-        });
-    }
-    // دالة لزيادة النقاط وتخزينها
-// دالة لزيادة النقاط وتخزينها
-function increaseScore(points) {
-    let currentScore = parseInt(localStorage.getItem('user_score')) || 0;
-    localStorage.setItem('user_score', currentScore + points);
-    console.log("النقاط الحالية: " + localStorage.getItem('user_score')); // للفحص فقط
-}
-
-// أتمتة زيادة النقاط بناءً على السلوك:
-// 1. بمجرد فتح الموقع (نقاط دخول)
-if (!localStorage.getItem('user_score')) increaseScore(10);
-
-// 2. عند قضاء دقيقة كاملة في الموقع (اهتمام زمني)
-setTimeout(() => increaseScore(20), 60000);
-
-// 3. عند الوصول لنهاية قسم "نماذج أعمالنا" (اهتمام بالمحتوى)
-const portfolioSection = document.getElementById('portfolio');
-const observerScore = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-        increaseScore(15);
-        observerScore.disconnect(); // زيادة مرة واحدة فقط
-    }
-}, { threshold: 0.5 });
-observerScore.observe(portfolioSection);
 </script>
 
    <footer class="bg-[#b4382a] text-white py-12">
