@@ -423,25 +423,62 @@
     </div>
 </section>
 <script>
+    // 1. نظام النقاط التلقائي (يعمل بمجرد تحميل الصفحة)
+    function increaseScore(points) {
+        let currentScore = parseInt(localStorage.getItem('user_score')) || 0;
+        localStorage.setItem('user_score', currentScore + points);
+        console.log("النقاط الحالية: " + localStorage.getItem('user_score'));
+    }
+
+    // زيادة النقاط تلقائياً بناءً على السلوك
+    if (!localStorage.getItem('user_score')) increaseScore(10); // دخول
+    setTimeout(() => increaseScore(20), 60000); // بقاء دقيقة
+
+    const portfolioSection = document.getElementById('portfolio');
+    if (portfolioSection) {
+        const observerScore = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                increaseScore(15);
+                observerScore.disconnect();
+            }
+        }, { threshold: 0.5 });
+        observerScore.observe(portfolioSection);
+    }
+
+    // 2. التقاط المصدر من الرابط (مثلاً ?source=facebook)
+    const urlParams = new URLSearchParams(window.location.search);
+    const sourceParam = urlParams.get('source');
+    if (sourceParam) {
+        const leadSourceInput = document.getElementById('lead_source');
+        if (leadSourceInput) leadSourceInput.value = sourceParam;
+    }
+
+    // 3. دالة الإرسال الموحدة (تم دمج الدالتين هنا لمنع التكرار)
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const btn = document.getElementById('submitBtn');
         const status = document.getElementById('statusMessage');
         
-        // تغيير حالة الزر أثناء الإرسال
         btn.disabled = true;
         btn.innerText = "جاري معالجة طلبك...";
         btn.style.background = "#b2bec3";
 
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
+        // جمع كافة البيانات المطلوبة بما فيها النقاط والمصدر
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value, // حقل الهاتف في تصميمك
+            phone: document.getElementById('email').value, 
+            message: document.getElementById('message').value,
+            lead_source: document.getElementById('lead_source').value || 'website',
+            interest_score: localStorage.getItem('user_score') || 0 // إرسال النقاط
+        };
 
         try {
-            const response = await fetch('api/submit', {
+            const response = await fetch('/api/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify(formData)
             });
 
             const result = await response.json();
@@ -449,7 +486,8 @@
             status.style.display = "block";
             if (response.ok) {
                 status.style.color = "#00b894";
-                status.innerText = " تم ارسال طلبك بنجاح ✅ وسيتم التواصل معك في اقل من 24 ساعة";
+                status.innerText = "تم إرسال طلبك بنجاح ✅ وسيتم التواصل معك في أقل من 24 ساعة";
+                localStorage.removeItem('user_score'); // تصفير النقاط بعد النجاح
                 e.target.reset();
             } else {
                 throw new Error(result.error || "فشل الإرسال");
@@ -464,92 +502,7 @@
             btn.style.background = "#00b894";
         }
     });
-   
-    // التقاط المصدر من الرابط (مثلاً ?source=facebook)
-    const urlParams = new URLSearchParams(window.location.search);
-    const source = urlParams.get('source');
-    if (source) {
-        document.getElementById('lead_source').value = source;
-    }
-
-    // تحديث وظيفة الإرسال لتشمل المصدر
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value,
-                phone: document.getElementById('phone').value, // تأكد من وجود حقل الهاتف
-                lead_source: document.getElementById('lead_source').value,
-                interest_score: localStorage.getItem('user_score') || 0
-            };
-
-            const response = await fetch('/api/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-            // ... باقي منطق الرد التلقائي الذي صممناه اليوم
-        });
-    }
-    // دالة لزيادة النقاط وتخزينها
-// دالة لزيادة النقاط وتخزينها
-function increaseScore(points) {
-    let currentScore = parseInt(localStorage.getItem('user_score')) || 0;
-    localStorage.setItem('user_score', currentScore + points);
-    console.log("النقاط الحالية: " + localStorage.getItem('user_score')); // للفحص فقط
-}
-
-// أتمتة زيادة النقاط بناءً على السلوك:
-// 1. بمجرد فتح الموقع (نقاط دخول)
-if (!localStorage.getItem('user_score')) increaseScore(10);
-
-// 2. عند قضاء دقيقة كاملة في الموقع (اهتمام زمني)
-setTimeout(() => increaseScore(20), 60000);
-
-// 3. عند الوصول لنهاية قسم "نماذج أعمالنا" (اهتمام بالمحتوى)
-const portfolioSection = document.getElementById('portfolio');
-const observerScore = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-        increaseScore(15);
-        observerScore.disconnect(); // زيادة مرة واحدة فقط
-    }
-}, { threshold: 0.5 });
-observerScore.observe(portfolioSection);
 </script>
-
-   <footer class="bg-[#b4382a] text-white py-12">
-    <div class="container mx-auto px-6 text-center">
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold italic text-[#FFFFFF]">Global Agency</h2>
-            <p class="text-[#FFFFFF] mt-2">نحول أفكارك الرقمية إلى واقع ملموس</p>
-        </div>
-
-        <div class="flex justify-center space-x-reverse space-x-8 mb-8">
-            <a href="https://www.facebook.com/share/1Ec8oNiDFm/" target="_blank" class="text-[#FFFFFF] hover:text-[#1877F2] transition-all transform hover:scale-125 text-3xl">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/global.agency.2026?igsh=MWs1Y2J1OHplczZidA==" target="_blank" class="text-[#FFFFFF] hover:text-[#E4405F] transition-all transform hover:scale-125 text-3xl">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://wa.me/967781088588" target="_blank" class="text-[#FFFFFF] hover:text-[#25D366] transition-all transform hover:scale-125 text-3xl">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        </div>
-
-        <div class="border-t border-[#FFFFFF]-800 pt-8 text-sm text-[#FFFFFF]">
-            <p>2026 © جميع الحقوق محفوظة لـ Global Agency</p>
-            <div class="mt-4 flex justify-center space-x-reverse space-x-6">
-                <span class="flex items-center"><i class="fas fa-phone-alt ml-2 text-[#FFFFF]"></i> 781088488 - 781088588</span>
-               
-            </div>
-        </div>
-    </div>
-</footer>
-<script>
-
 
     // 1. التحكم في قائمة الجوال (فتح/إغلاق مع التحريك)
     const btn = document.getElementById('mobile-menu-button');
