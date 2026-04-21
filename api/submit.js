@@ -67,4 +67,3 @@ if (!error) {
     localStorage.removeItem('user_score');
 }
 };
-هذا ملف submit الكود في المكان الصح؟
