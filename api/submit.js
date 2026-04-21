@@ -21,7 +21,8 @@ module.exports = async (req, res) => {
       body: JSON.stringify({ 
         name, 
         email, 
-        message,
+        message, 
+       
         lead_source: source,
         interest_score: score // إرسال النقاط المحفوظة إلى العمود الجديد
       })
