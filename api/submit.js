@@ -1,5 +1,5 @@
 module.exports = async (req, res) => {
-  // 1. استقبال البيانات الأساسية فقط
+  // 1. استقبال البيانات الأساسية فقط (تم حذف interest_score والـ score)
   const { name, email, message, lead_source } = req.body;
   const source = lead_source || 'website';
 
@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   const CHAT_ID = '8389021637';
 
   try {
-    // 2. تخزين البيانات في Supabase (بدون عمود النقاط)
+    // 2. التخزين في Supabase (الأعمدة الأساسية فقط كما في صورتك)
     const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/contacts`, {
       method: 'POST',
       headers: {
@@ -18,18 +18,18 @@ module.exports = async (req, res) => {
       },
       body: JSON.stringify({ 
         name, 
-        email, // هذا هو رقم الهاتف الذي يتم تخزينه مكان الايميل
+        email, 
         message, 
         lead_source: source
       })
     });
 
-    if (!response.ok) throw new Error("فشل في تخزين البيانات");
+    if (!response.ok) throw new Error("فشل في تخزين البيانات في القاعدة");
 
     // 3. إرسال التنبيه لتليجرام
-    const alertText = `🚨 **عميل جديد لـ Global Agency**\n\n` +
+    const alertText = `🚨 **طلب جديد لـ Global Agency**\n\n` +
                       `👤 الاسم: ${name}\n` +
-                      `📞 الهاتف: https://wa.me/${email}\n` + // الرابط يستخدم القيمة المخزنة في email
+                      `📞 الهاتف: https://wa.me/${email}\n` +
                       `💼 الرسالة: ${message}\n` +
                       `🌍 المصدر: ${source}\n` +
                       `🕒 التاريخ: ${new Date().toLocaleString('ar-YE')}`;
