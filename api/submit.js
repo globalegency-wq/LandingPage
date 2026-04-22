@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
         name, 
         email, 
         message, 
-        phone, 
+       
         lead_source: source 
       })
     });
@@ -48,8 +48,8 @@ module.exports = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-  // داخل دالة الإرسال (Submit Function)
-const finalScore = localStorage.getItem('user_score') || 0;
+
+  
 
 const { data, error } = await supabase
   .from('contacts')
@@ -58,12 +58,6 @@ const { data, error } = await supabase
       name: nameValue, 
       phone: phoneValue, 
       message: messageValue,
-      interest_score: parseInt(finalScore) // إرسال النقاط المحفوظة
     }
   ]);
-
-// بعد نجاح الإرسال، يمكنك مسح النقاط لتبدأ من جديد مع زائر آخر
-if (!error) {
-    localStorage.removeItem('user_score');
-}
 };
