@@ -474,25 +474,44 @@
     }
 
     // تحديث وظيفة الإرسال لتشمل المصدر
-    const contactForm = document.getElementById('contactForm');
-   if (contactForm) {
+  const contactForm = document.getElementById('contactForm');
+if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "جاري الإرسال...";
+
         const formData = {
             name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(), // هذا هو الهاتف
+            email: document.getElementById('email').value.trim(), // الهاتف
             message: document.getElementById('message').value.trim(),
             lead_source: document.getElementById('lead_source').value || 'website'
         };
+
+        try {
             const response = await fetch('/api/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             });
-            // ... باقي منطق الرد التلقائي الذي صممناه اليوم
-        });
-    }
+
+            if (response.ok) {
+                alert("✅ تم الإرسال بنجاح!");
+                contactForm.reset();
+            } else {
+                const err = await response.json();
+                throw new Error(err.error || "خطأ في السيرفر");
+            }
+        } catch (error) {
+            alert("❌ فشل في تخزين البيانات: " + error.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "إرسال الطلب الآن";
+        }
+    });
+}
 
 </script>
 
