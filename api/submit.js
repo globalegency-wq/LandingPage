@@ -56,7 +56,7 @@ const { data, error } = await supabase
   .insert([
     { 
       name: nameValue, 
-      phone: phoneValue, 
+      email: emailValue, 
       message: messageValue,
     }
   ]);
