@@ -1,5 +1,5 @@
 module.exports = async (req, res) => {
-  const { name, email, message, phone, lead_source } = req.body;
+  const { name, email, message, lead_source } = req.body;
   const source = lead_source || 'website';
 
   // --- بيانات التنبيه (استبدل القيم هنا) ---
